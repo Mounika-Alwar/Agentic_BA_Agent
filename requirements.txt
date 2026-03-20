@@ -1,0 +1,21 @@
+# Core App
+streamlit
+pandas
+numpy
+
+# Visualization
+plotly
+
+# Machine Learning
+scikit-learn
+
+# LLM + LangChain
+langchain
+langchain-core
+langchain-google-genai
+
+# Environment Variables
+python-dotenv
+
+# PDF Generation (Report Agent)
+reportlab
