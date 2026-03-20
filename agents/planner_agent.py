@@ -16,7 +16,7 @@ class PlannerAgent:
     """
 
     def __init__(self, df, goal):
-        api_key = os.getenv("GEMINI_API_KEY") or st.secrets["GEMINI_API_KEY"]
+        api_key = os.getenv("GEMINI_API_KEY") or st.secrets.get("GEMINI_API_KEY")
 
         if not api_key:
             raise ValueError("GEMINI_API_KEY not found in environment variables")
