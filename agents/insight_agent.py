@@ -1,3 +1,4 @@
+# Insight Agent
 import json
 import os
 from dotenv import load_dotenv
@@ -6,7 +7,7 @@ from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_core.prompts import PromptTemplate
 import streamlit as st
 
-
+# Generates clean insights based on the analysis results, goal and dataset
 class InsightAgent:
     """
     Insight Agent:
@@ -30,9 +31,6 @@ class InsightAgent:
             temperature=0.3
         )
 
-    # -----------------------------
-    # PREPARE CONTEXT
-    # -----------------------------
     def prepare_context(self):
         """
         Convert results into LLM-friendly text
@@ -43,9 +41,6 @@ class InsightAgent:
         except:
             return str(self.results)
 
-    # -----------------------------
-    # PROMPT
-    # -----------------------------
     def build_prompt(self):
         template = """
 You are a senior Business Analyst.
@@ -85,9 +80,6 @@ Generate insights:
             template=template
         )
 
-    # -----------------------------
-    # GENERATE INSIGHTS
-    # -----------------------------
     def generate_insights(self):
         prompt = self.build_prompt()
 
@@ -100,9 +92,6 @@ Generate insights:
 
         return self.parse_output(response.content)
 
-    # -----------------------------
-    # PARSE OUTPUT
-    # -----------------------------
     def parse_output(self, text):
         """
         Convert LLM output into clean list
