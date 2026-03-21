@@ -1,3 +1,4 @@
+# Report Agent
 import os
 import json
 from dotenv import load_dotenv
@@ -9,6 +10,7 @@ from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer
 from reportlab.lib.styles import getSampleStyleSheet
 
 
+# Generates report with all the context available as per user customization using Gemini
 class ReportAgent:
     """
     Generates a business report and supports PDF export
@@ -34,9 +36,6 @@ class ReportAgent:
             temperature=0.4
         )
 
-    # -----------------------------
-    # BUILD PROMPT
-    # -----------------------------
     def build_prompt(self):
         return f"""
 You are a professional Business Analyst.
@@ -68,17 +67,12 @@ OUTPUT:
 Return clean markdown text
 """
 
-    # -----------------------------
-    # GENERATE REPORT
-    # -----------------------------
     def generate_report(self):
         prompt = self.build_prompt()
         response = self.llm.invoke(prompt)
         return response.content.strip()
 
-    # -----------------------------
-    # SAVE AS PDF
-    # -----------------------------
+
     def save_as_pdf(self, report_text, file_path="report.pdf"):
         """
         Saves the report text as a PDF file
