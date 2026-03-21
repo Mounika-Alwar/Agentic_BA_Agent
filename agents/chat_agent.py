@@ -1,3 +1,4 @@
+# Chat Agent
 import streamlit as st
 import json
 import os
@@ -6,7 +7,7 @@ from dotenv import load_dotenv
 from langchain_google_genai import ChatGoogleGenerativeAI
 import streamlit as st
 
-
+# Uses Gemini to facilitate chat interface which has all the info that was generated till now as context 
 class ChatAgent:
     """
     Conversational Agent that answers user queries
@@ -32,9 +33,7 @@ class ChatAgent:
             temperature=0.3
         )
 
-    # -----------------------------
-    # BUILD CONTEXT
-    # -----------------------------
+
     def build_context(self):
         context = f"""
 You are an intelligent Business Analyst Chat Assistant.
@@ -63,9 +62,6 @@ Rules:
 
         return context
 
-    # -----------------------------
-    # GET RESPONSE
-    # -----------------------------
     def get_response(self, user_query, chat_history):
         context = self.build_context()
 
@@ -92,37 +88,22 @@ ANSWER:
         return response.content.strip()
 
 
-# =============================
-# STREAMLIT CHAT UI
-# =============================
 def render_chat_interface(goal, plan, analysis_results, insights):
 
     st.title("Chat with AI Analyst")
     st.write("You can now chat with the agent about your data and analysis.")
 
-    # -----------------------------
-    # INIT CHAT HISTORY
-    # -----------------------------
     if "chat_history" not in st.session_state:
         st.session_state.chat_history = []
 
-    # -----------------------------
-    # CLEAR CHAT BUTTON
-    # -----------------------------
     if st.button("Clear Chat"):
         st.session_state.chat_history = []
         st.rerun()
 
-    # -----------------------------
-    # DISPLAY CHAT HISTORY
-    # -----------------------------
     for msg in st.session_state.chat_history:
         with st.chat_message(msg["role"]):
             st.markdown(msg["content"])
 
-    # -----------------------------
-    # USER INPUT
-    # -----------------------------
     user_input = st.chat_input("Ask something about your data...")
 
     if user_input:
