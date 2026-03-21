@@ -1,3 +1,4 @@
+# Main APP
 import streamlit as st
 import pandas as pd
 from agents.planner_agent import PlannerAgent
@@ -261,10 +262,6 @@ elif page == "Report":
     else:
         st.subheader("Customize Your Report")
 
-        # -----------------------------
-        # USER CUSTOMIZATION INPUTS
-        # -----------------------------
-
 
         tone = st.selectbox(
             "Report Tone",
@@ -304,9 +301,6 @@ elif page == "Report":
             placeholder="e.g., Focus more on sales trends..."
         )
 
-        # -----------------------------
-        # GENERATE REPORT
-        # -----------------------------
         if st.button("Generate Report"):
 
             preferences = {
@@ -329,9 +323,7 @@ elif page == "Report":
 
             st.session_state.report = report
 
-        # -----------------------------
-        # DISPLAY REPORT
-        # -----------------------------
+
         if "report" in st.session_state and st.session_state.report:
 
             st.subheader("Generated Report")
