@@ -1,3 +1,4 @@
+# Analyst Agent
 import pandas as pd
 import numpy as np
 import plotly.express as px
@@ -14,6 +15,7 @@ from sklearn.metrics import(
     accuracy_score, f1_score, confusion_matrix
 )
 
+# Provides all the methods to do the analysis
 class AnalystAgent:
     """
     Core engine reponsible for performing data analysis,
