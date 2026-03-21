@@ -1,3 +1,4 @@
+# Planner Agent
 import json
 import re
 from dotenv import load_dotenv
@@ -8,7 +9,7 @@ from langchain_core.prompts import PromptTemplate
 import streamlit as st
 
 
-
+# Uses gemini to make the detailed plan as per dataset and goal of the user
 class PlannerAgent:
     """
     Planner Agent:
@@ -34,9 +35,7 @@ class PlannerAgent:
             temperature=0
         )
 
-    # -----------------------------
-    # PROMPT
-    # -----------------------------
+
     def build_prompt(self):
         template = """
 You are an expert Business Analyst Planner Agent.
@@ -89,9 +88,6 @@ Generate plan:
             template=template
         )
 
-    # -----------------------------
-    # GENERATE PLAN
-    # -----------------------------
     def generate_plan(self):
         prompt = self.build_prompt()
 
@@ -105,9 +101,7 @@ Generate plan:
 
         return self.safe_parse(text)
 
-    # -----------------------------
-    # SAFE PARSE
-    # -----------------------------
+
     def safe_parse(self, text):
         try:
             return json.loads(text)
@@ -126,8 +120,6 @@ Generate plan:
             {"step": "describe_data"}
         ]
 
-    # -----------------------------
-    # FORMAT PLAN
-    # -----------------------------
+
     def format_plan(self, plan):
         return json.dumps(plan, indent=4)
